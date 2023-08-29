@@ -27,44 +27,39 @@
 
  </header>
  <nav>
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">System Labs</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-            </ul>
- 
-          </div>
-        </div>
+<nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand d-md-none" href="#">
+      <svg class="bi" width="24" height="24"><use xlink:href="#aperture"/></svg>
+      Aperture
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="#offcanvas" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="#offcanvas" aria-labelledby="#offcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="#offcanvasLabel">Aperture</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-    </nav>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav flex-grow-1 justify-content-between">
+          <li class="nav-item"><a class="nav-link" href="#">
+            <svg class="bi" width="24" height="24"><use xlink:href="#aperture"/></svg>
+          </a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Tour</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Product</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Enterprise</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">
+            <svg class="bi" width="24" height="24"><use xlink:href="#cart"/></svg>
+          </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
  </nav>
 <!-- Header -->
 
@@ -78,7 +73,7 @@
           <label for="floatingInput">Usuário</label>
          </div>
          <div class="form-floating">
-          <input type="text" class="form-control" id="inputUser"  placeholder="Usuário">
+          <input type="text" class="form-control" id="inputUser_confirm"  placeholder="Usuário">
           <label for="floatingInput">Confirme o usuário</label>
          </div>
          
@@ -91,7 +86,7 @@
           <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
          
          </div>
-          <button class="btn btn-primary w-100 py-2" type="submit">Cadastrar</button>
+          <button class="btn btn-primary w-100 py-2" type="button" onclick="validaCadastroUser()">Cadastrar</button>
           <p class="mt-5 mb-3 text-body-secondary">&copy; 2023 - 2023</p>
       </form>
    </section>

@@ -14,6 +14,12 @@
     	margin-left: 40%;
     	font-weight: 700;
    	}
+
+     .main{
+        display:flex;
+        justify-content: center;
+        margin-top:40px;
+    }
    </style>
 </head>
 <body>
@@ -23,44 +29,39 @@
 
  </header>
  <nav>
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">System Labs</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Offcanvas</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-            </ul>
- 
-          </div>
+  <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
+    <div class="container">
+      <a class="navbar-brand d-md-none" href="#">
+        <svg class="bi" width="24" height="24"><use xlink:href="#aperture"/></svg>
+        Aperture
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="#offcanvas" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="#offcanvas" aria-labelledby="#offcanvasLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="#offcanvasLabel">Aperture</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav flex-grow-1 justify-content-between">
+            <li class="nav-item"><a class="nav-link" href="#">
+              <svg class="bi" width="24" height="24"><use xlink:href="#aperture"/></svg>
+            </a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Tour</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Product</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Enterprise</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">
+              <svg class="bi" width="24" height="24"><use xlink:href="#cart"/></svg>
+            </a></li>
+          </ul>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
  </nav>
 <!-- Header -->
 
@@ -70,12 +71,12 @@
          <h1 class="h3 mb-3 fw-normal">Log in</h1>
    
           <div class="form-floating">
-            <input type="text" class="form-control" id="inputUser" placeholder="name@example.com">
+            <input type="text" class="form-control" id="inputUser" name="inputUser" placeholder="Usuário"> <!-- Parametros contidos no NAME e que são aproveitados pelo servlet -->
             <label for="floatingInput">Usuário</label>
           </div>
           <div class="form-floating">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Senha"> <!-- Parametros contidos no NAME e que são aproveitados pelo servlet -->
+            <label for="floatingPassword">Senha</label>
           </div>
     
           <div class="form-check text-start my-3">

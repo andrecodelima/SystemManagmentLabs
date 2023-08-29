@@ -1,6 +1,7 @@
 package br.com.maven.systemlabs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -76,21 +77,31 @@ public class AcessoController extends HttpServlet {
 	
 	public void Login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
-		String user = request.getParameter("inputUser");
-		String pass = request.getParameter("inputPassword");
+		String user = request.getParameter("inputUser"); 		// Paremetro que vem do NAME no formulário		
+		String pass = request.getParameter("inputPassword");	// Paremetro que vem do NAME no formulário	
 		
-		Users users = AcessoServices.getAllUser(user);
+		Users users = AcessoServices.getUsuario(user); // user -> Parametro passado ao método
 		
-		if(users.getUsuario() == null || users.getSenha() == null) {
-			response.getWriter().append("Usuario ou senha inválido");
+		if(users.getUsuario() == null) {
+			response.getWriter().append("ERRO");
 
-		}else{
-			 if((users.getUsuario().equals(user)) && (users.getSenha().equals(pass))) {}
-				response.getWriter().append("Acesso permitido");
+		}else {
+			
+			if((users.getUsuario().equals(user)) && (users.getSenha().equals(pass))) {
+				response.getWriter().append("ACESSO PERMITIDO");
 
+			}else if(users.getUsuario() != user || users.getSenha() != pass) {
+				response.getWriter().append("ACESSO NEGADO");
+
+			}
+			
 		}
+		
 		
  	}
 	
 
+	
+	
+	
 }
