@@ -15,7 +15,7 @@ import br.com.maven.systemlabs.service.AcessoServices;
  
 
  
-@WebServlet(urlPatterns = {  "/acessoCadastro", "/newUser", "/login" })
+@WebServlet(urlPatterns = {  "/acessoLogin", "/acessoCadastro", "/newUser", "/login" })
 public class AcessoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,11 +30,14 @@ public class AcessoController extends HttpServlet {
 
 		switch (address) {
 		
-		case "/acessoCadastro":
-			Acesso(request, response);
+		case "/acessoLogin":
+			AcessoLogin(request, response);
 			break;
 		
-		
+		case "/acessoCadastro":
+			AcessoCadastro(request, response);
+			break;
+				
 		
 		case "/newUser":
 			NewUser(request, response);
@@ -52,11 +55,16 @@ public class AcessoController extends HttpServlet {
 
 	}
 	
-	public void Acesso(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void AcessoCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		 response.sendRedirect("cadastroUser.html");
 		 
-		  
+	}
+	
+	public void AcessoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		 response.sendRedirect("login.html");
+		 
 	}
 	
 	

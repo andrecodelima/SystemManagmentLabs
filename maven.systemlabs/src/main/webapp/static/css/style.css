@@ -31,7 +31,17 @@ body {
     padding: 20px;
     width: 450px;
     box-shadow: 4px -1px 8px 2px #0f0e0e99;
-}x
+}
+
+.box-register{
+    border-radius: 23px;
+    padding: 20px;
+    width: 40%;
+    box-shadow: 4px -1px 8px 2px #0f0e0e99;
+
+    display: flex;
+    justify-content: space-evenly;
+}
 
 
 /* CUSTOMIZE THE CAROUSEL
