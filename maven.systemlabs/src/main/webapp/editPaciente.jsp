@@ -1,9 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<%@ page import= "java.text.DateFormat" %>
+<%@ page import= "java.time.LocalDate" %>
+
+<%@ page import= "java.util.ArrayList" %>
+
+<%@ page import="br.com.maven.systemlabs.model.Paciente"%>
+<%@ page import="br.com.maven.systemlabs.service.PacienteServices"%>
+
+<%
+	 Paciente paciente = PacienteServices.getId(Integer.parseInt(request.getParameter("id")));
+
+%>
+
 <!DOCTYPE html>
 <html lang="pt-Br">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro | Paciente</title>
+  <title>Cadastro | Medico</title>
    
    <!-- Style - BS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -22,6 +37,7 @@
         display:flex;
         justify-content: center;
         margin-top:40px;
+        
     }
     
     .container {
@@ -29,7 +45,7 @@
       }
 
     #form{
-      width: 34vw;
+      width: 60vw;
       margin-left: -56px;
     }
 
@@ -37,6 +53,17 @@
       margin-left: -56px;
 
     }
+
+    .box-register{
+    border-radius: 23px;
+    padding-top: 25px;
+    padding-bottom: 40px;
+    width: 80%;
+    box-shadow: 4px -1px 8px 2px #0f0e0e99;
+
+    display: flex;
+    justify-content: space-evenly;
+}
 
    </style>
 </head>
@@ -85,42 +112,43 @@
 <main class="main">
   <section class="box-register">
     <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">Cadastro</h4>
+      <h4 class="mb-3">Médico</h4>
 
-      <!-- Formulário de Cadastro -->
-      <form class="needs-validation" id="form" name="formCadastro" novalidate action ="NewPaciente">
+      <!-- FormulÃ¡rio de Cadastro -->
+      <form class="needs-validation" id="form" name="formCadastro" novalidate action ="updatePaciente">
         <div class="row g-3">
-          <div class="col-sm-10">
+
+          <div class="col-sm-4">
             <label for="firstName" class="form-label">Nome Completo</label>
-            <input type="text" class="form-control" id="nome" name="inputNome" placeholder="Nome Completo" value="" required>
+            <input type="text" class="form-control" id="nome" name="inputNome" placeholder="Nome Completo" value="<%=paciente.getNome()%>" required>
             <div class="invalid-feedback">
-              Por favor insira o nome completo
+                Por favor informe o nome
             </div>
           </div>
 
-          <div class="col-5">
+          <div class="col-2">
             <label for="username" class="form-label">CPF</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" id="cpf" name="inputCpf" placeholder="999.999.999-99" required>
+              <input type="text" class="form-control" id="cpf" name="inputCpf" placeholder="999.999.999-99" value="<%=paciente.getCpf()%>" required>
             <div class="invalid-feedback">
               Por favor informe o CPF
               </div>
             </div>
           </div>
 
-          <div class="col-5">
+          <div class="col-2">
             <label for="username" class="form-label">Data de nascimento</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" id="data" name="inputNascimento" placeholder="00/00/0000" required>
+              <input type="text" class="form-control" id="data" name="inputData" placeholder="00/00/0000" value="<%=paciente.getNascimento()%>" required>
             <div class="invalid-feedback">
               Por favor informe sua data de nascimento
               </div>
             </div>
           </div>
 
-		      <div class="col-md-5">
+		      <div class="col-md-2">
             <label for="state" class="form-label">Gênero</label>
-            <select class="form-select" id="genero" name="inputGenero" required>
+            <select class="form-select" id="genero" name="inputGenero" value="<%=paciente.getGenero()%>" required>
               <option disabled>Escolha...</option>
               <option value="feminino">Feminino</option>
               <option value="masculino">Masculino</option>
@@ -130,10 +158,10 @@
             </div>
           </div>
 
-          <div class="col-5">
+          <div class="col-2">
             <label for="username" class="form-label">Telefone</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" id="telefone" name="inputTelefone" placeholder="(00) 0000-0000" required>
+              <input type="text" class="form-control" id="telefone" name="inputTelefone" placeholder="(00) 0000-0000" value="<%=paciente.getTelefone()%>" required>
             <div class="invalid-feedback">
               Por favor informe o telefone
               </div>
@@ -141,28 +169,31 @@
           </div>
 
 
-          <div class="col-10">
+          <div class="col-4">
             <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-            <input type="email" class="form-control" id="email" name="inputEmail" placeholder="nomedoemail@example.com">
+            <input type="email" class="form-control" id="email" name="inputEmail" placeholder="nomedoemail@example.com" value="<%=paciente.getEmail()%>">
             <div class="invalid-feedback">
               Por favor insira seu email
             </div>
           </div>
 
-          <div class="col-10">
+          <div class="col-4">
             <label for="address" class="form-label">Endereço</label>
-            <input type="text" class="form-control" id="endereco" name="inputEndereco" placeholder="" required>
+            <input type="text" class="form-control" id="endereco" name="inputEndereco" placeholder="" value="<%=paciente.getEndereco()%>" required>
             <div class="invalid-feedback">
               Por favor insira seu endereço
             </div>
+            
+ 			<input type="hidden" name="id" value="<%=paciente.getId()%>">
           </div>
 
         </div>
 
         <hr class="my-4">
-        <button class="w-30 btn btn-primary btn-lg" type="submit">Cadastrar</button>
+        <button class="w-30 btn btn-primary btn-lg" type="submit">Salvar</button>
+        
       </form>
-      <!-- Fim formulário cadastro -->
+      <!-- Fim formulÃ¡rio cadastro -->
 
     </div>
   </section>
@@ -182,7 +213,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <!-- JS Local --> 
-<!-- Para as mascaras funcionarem é preciso que as chamadas fiquem nessa ordem -->
+<!-- Para as mascaras funcionarem Ã© preciso que as chamadas fiquem nessa ordem -->
 <script src="./static/js/jquery.js"></script>
 <script src="./static/js/scripts.js"></script>
 <script src="./static/js/jquery.maskedinput.min.js"></script> 

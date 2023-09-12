@@ -1,9 +1,62 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<%@ page import= "java.text.DateFormat" %>
+<%@ page import= "java.time.LocalDate" %>
+
+<%@ page import= "java.util.ArrayList" %>
+
+<%@ page import="br.com.maven.systemlabs.model.Paciente"%>
+<%@ page import="br.com.maven.systemlabs.service.PacienteServices"%>
+
+<%
+	ArrayList<Paciente> lista = PacienteServices.getAllPacientes();
+	String line = "";
+	
+	if(lista.isEmpty()){
+		line = "<tr><th colspan='8'> Não há pacientes cadastrados </tr></th>";
+
+	}else{
+		
+		for(Paciente p : lista){
+			 int id						= p.getId();
+			 String nome 				= p.getNome();
+			 String cpf					= p.getCpf();
+			 LocalDate nascimento		= p.getNascimento();
+			 String genero				= p.getGenero();
+			 String telefone			= p.getTelefone();
+			 String email				= p.getEmail();
+			 String endereco			= p.getEndereco();
+		
+		
+		line += "<tr>"					+
+		
+				"<td>"					+ id				+ "</td>"		+
+				"<td>"					+ nome				+ "</td>"		+
+				"<td>"					+ cpf				+ "</td>"		+
+				"<td>"					+ nascimento		+ "</td>"		+
+				"<td>"					+ genero			+ "</td>"		+
+				"<td>"					+ telefone			+ "</td>"		+
+				"<td>"					+ email				+ "</td>"		+
+				"<td>"					+ endereco			+ "</td>"		+
+				
+				"<td><a class='btn btn-warning' href='editPaciente.jsp?id="		 + id + "'>Editar</a></td>"  	+
+				"<td><a class='btn btn-danger'  href='deletePaciente?id="		 + id + "'>Excluir</a></td>"  	+
+				
+				"</tr>";
+		}
+		
+		
+	}
+
+%>
+
 <!DOCTYPE html>
-<html lang="pt-Br">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro | Paciente</title>
+  <title>Pacientes</title>
    
    <!-- Style - BS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -22,21 +75,35 @@
         display:flex;
         justify-content: center;
         margin-top:40px;
+        
     }
     
     .container {
         max-width: 960px;
       }
 
-    #form{
-      width: 34vw;
-      margin-left: -56px;
-    }
-
+    
     .mb-3{
       margin-left: -56px;
 
     }
+
+    .box-register{
+    border-radius: 23px;
+    padding-top: 25px;
+    padding-bottom: 40px;
+    width: 80%;
+    box-shadow: 4px -1px 8px 2px #0f0e0e99;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    .mb-3{
+      background-color: #dcdcdd;
+      padding: 11px;
+      width: 100%;
+    }
+}
 
    </style>
 </head>
@@ -85,84 +152,36 @@
 <main class="main">
   <section class="box-register">
     <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">Cadastro</h4>
+     <h4 class="mb-3">Pacientes</h4>
+  
 
-      <!-- Formulário de Cadastro -->
-      <form class="needs-validation" id="form" name="formCadastro" novalidate action ="NewPaciente">
-        <div class="row g-3">
-          <div class="col-sm-10">
-            <label for="firstName" class="form-label">Nome Completo</label>
-            <input type="text" class="form-control" id="nome" name="inputNome" placeholder="Nome Completo" value="" required>
-            <div class="invalid-feedback">
-              Por favor insira o nome completo
-            </div>
-          </div>
-
-          <div class="col-5">
-            <label for="username" class="form-label">CPF</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="cpf" name="inputCpf" placeholder="999.999.999-99" required>
-            <div class="invalid-feedback">
-              Por favor informe o CPF
-              </div>
-            </div>
-          </div>
-
-          <div class="col-5">
-            <label for="username" class="form-label">Data de nascimento</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="data" name="inputNascimento" placeholder="00/00/0000" required>
-            <div class="invalid-feedback">
-              Por favor informe sua data de nascimento
-              </div>
-            </div>
-          </div>
-
-		      <div class="col-md-5">
-            <label for="state" class="form-label">Gênero</label>
-            <select class="form-select" id="genero" name="inputGenero" required>
-              <option disabled>Escolha...</option>
-              <option value="feminino">Feminino</option>
-              <option value="masculino">Masculino</option>
-            </select>
-            <div class="invalid-feedback">
-              Por favor selecione um gênero
-            </div>
-          </div>
-
-          <div class="col-5">
-            <label for="username" class="form-label">Telefone</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="telefone" name="inputTelefone" placeholder="(00) 0000-0000" required>
-            <div class="invalid-feedback">
-              Por favor informe o telefone
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-10">
-            <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-            <input type="email" class="form-control" id="email" name="inputEmail" placeholder="nomedoemail@example.com">
-            <div class="invalid-feedback">
-              Por favor insira seu email
-            </div>
-          </div>
-
-          <div class="col-10">
-            <label for="address" class="form-label">Endereço</label>
-            <input type="text" class="form-control" id="endereco" name="inputEndereco" placeholder="" required>
-            <div class="invalid-feedback">
-              Por favor insira seu endereço
-            </div>
-          </div>
-
-        </div>
-
-        <hr class="my-4">
-        <button class="w-30 btn btn-primary btn-lg" type="submit">Cadastrar</button>
-      </form>
-      <!-- Fim formulário cadastro -->
+      <table class="table-responsive-lg">
+        <thead>
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Nascimento</th>
+            <th scope="col">Gênero</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Endereço</th>
+          </tr>
+        </thead>
+        
+        <tbody class="table-group-divider">
+          <tr>
+            <th><%=line %></th>     
+          </tr>
+        </tbody>
+        
+        <tfoot>
+        	<tr>
+        		<th colspan=10>Fim da lista</th>
+        	</tr>
+        </tfoot>
+        
+      </table>
 
     </div>
   </section>
@@ -182,7 +201,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <!-- JS Local --> 
-<!-- Para as mascaras funcionarem é preciso que as chamadas fiquem nessa ordem -->
+<!-- Para as mascaras funcionarem Ã© preciso que as chamadas fiquem nessa ordem -->
 <script src="./static/js/jquery.js"></script>
 <script src="./static/js/scripts.js"></script>
 <script src="./static/js/jquery.maskedinput.min.js"></script> 

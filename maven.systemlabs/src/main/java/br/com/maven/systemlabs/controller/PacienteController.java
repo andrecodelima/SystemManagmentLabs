@@ -16,7 +16,7 @@ import br.com.maven.systemlabs.service.PacienteServices;
  
 
  
-@WebServlet(urlPatterns = {  "/acessoCadastroPaciente", "/NewPaciente" })
+@WebServlet(urlPatterns = {  "/acessoCadastroPaciente", "/NewPaciente", "/deletePaciente", "/updatePaciente" })
 public class PacienteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,7 +39,16 @@ public class PacienteController extends HttpServlet {
 			insertPaciente(request, response);
 			break;
 	
-		}
+		
+		case "/deletePaciente":
+			DelPaciente(request, response);
+			break;
+			
+		case "/updatePaciente":
+			UpdatePaciente(request, response);
+			break;
+
+	}
 
  
 
@@ -51,14 +60,12 @@ public class PacienteController extends HttpServlet {
 		 
 	}
 	
- 
-	
 	
 	public void insertPaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		  // Tratamento da data		 
 		  String dataOriginal = request.getParameter("inputNascimento"); //Recebe o parâmetro 	
-		  LocalDate data = LocalDate.parse(dataOriginal, DateTimeFormatter.ofPattern("dd/MM/yyyy")); // Converte ele no formato de data que o Db entende (0000-00-00)
+		  LocalDate data = LocalDate.parse(dataOriginal,DateTimeFormatter.ofPattern("dd/MM/yyyy")); // Converte ele no formato de data que o Db entende (0000-00-00)
 		
 		  Paciente paciente = new Paciente(
 				  							request.getParameter("inputNome"),
@@ -71,19 +78,58 @@ public class PacienteController extends HttpServlet {
 				  						  );
 				  
 		 if(PacienteServices.insertPaciente(paciente)){
-			 response.getWriter().append("Cadastrado com sucesso");
+			 response.getWriter().append("Paciente CADASTRADO com sucesso");
 				System.out.println("Cadastrado");
 
 		 }else {
-			 response.getWriter().append("Falha no cadastro");
+			 response.getWriter().append("Falha ao CADASTRAR paciente");
 				System.out.println("Cadastrado");
 
 		 }
 		  
 	}
 	
-	 
+	public void UpdatePaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		  /* Instanciação do objeto paciente que receberá os parâmetros vindos do formulário pelo atributo 'name' */
+		  Paciente paciente = new Paciente(
+				  								Integer.parseInt(request.getParameter("id")),
+				  								request.getParameter("inputNome"),
+				  								request.getParameter("inputCpf"),
+				  								LocalDate.parse(request.getParameter("inputData")),
+				  								request.getParameter("inputGenero"),
+				  								request.getParameter("inputEmail"),
+				  								request.getParameter("inputEndereco"),
+				  								request.getParameter("inputTelefone")
+				  					);
+		  /*    
+		    	* Chamada 	- PacienteServices 'chama' o método updatePaciente que requer um parâmetro.
+		   		* Parâmetro - Como parâmetro atribuímos o objeto paciente instanciado ou criado acima. 
+		   	     
+		   */
+		  
+		  if(PacienteServices.updatePaciente(paciente)) {
+				 response.getWriter().append("Paciente EDITADO com sucesso");
+
+		  }else {
+				 response.getWriter().append("Falha AO EDITAR paciente");
+
+		  }
+		 
+	}
+	 
+	public void DelPaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		  if(PacienteServices.delPaciente(Integer.parseInt(request.getParameter("id")))) {
+				 response.getWriter().append("Paciente DELETADO com sucesso");
+
+		  }else {
+				 response.getWriter().append("Falha AO DELETAR paciente");
+
+		  }
+		 
+	}
+	
 	
 	
 	

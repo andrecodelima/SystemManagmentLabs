@@ -9,8 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="pacientes")
-public class Paciente {
+@Table(name="medicos")
+public class Medico {
 
 	
 	@Id
@@ -21,13 +21,16 @@ public class Paciente {
 	private String nome;
 	
 	@Column
-	private String cpf;
-	
-	@Column
 	private LocalDate nascimento;
 	
 	@Column
 	private String genero;
+	
+	@Column
+	private String cpf;
+	
+	@Column
+	private String telefone;
 	
 	@Column
 	private String email;
@@ -36,41 +39,49 @@ public class Paciente {
 	private String endereco;
 	
 	@Column
-	private String telefone;
+	private String crm;
+	
+	@Column
+	private String especialidade;
 	
 	@Column
 	private boolean ativo;
 
-	public Paciente() {
-		super();
-	}
+	public Medico(){}
 
-	public Paciente(int id, String nome, String cpf, LocalDate nascimento, String genero, String email, String endereco,
-			String telefone) {
+	public Medico(int id, String nome, LocalDate nascimento, String genero, String cpf, String telefone, String email,
+			String endereco, String crm, String especialidade, boolean ativo) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.cpf = cpf;
 		this.nascimento = nascimento;
 		this.genero = genero;
+		this.cpf = cpf;
+		this.telefone = telefone;
 		this.email = email;
 		this.endereco = endereco;
-		this.telefone = telefone;
+		this.crm = crm;
+		this.especialidade = especialidade;
+		this.ativo = ativo;
+
+
 	}
-	
-	public Paciente(String nome, String cpf, LocalDate nascimento, String genero, String email, String endereco,
-			String telefone) {
+
+	public Medico(String nome, LocalDate nascimento, String genero, String cpf, String telefone, String email,
+			String endereco, String crm, String especialidade, boolean ativo) {
 		super();
 		this.nome = nome;
-		this.cpf = cpf;
 		this.nascimento = nascimento;
 		this.genero = genero;
+		this.cpf = cpf;
+		this.telefone = telefone;
 		this.email = email;
 		this.endereco = endereco;
-		this.telefone = telefone;
+		this.crm = crm;
+		this.especialidade = especialidade;
+		this.ativo = ativo;
+
 	}
-	
-	
 
 	public int getId() {
 		return id;
@@ -88,14 +99,6 @@ public class Paciente {
 		this.nome = nome;
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	
 	public LocalDate getNascimento() {
 		return nascimento;
 	}
@@ -111,7 +114,22 @@ public class Paciente {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
 	public String getEmail() {
 		return email;
@@ -129,14 +147,21 @@ public class Paciente {
 		this.endereco = endereco;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getCrm() {
+		return crm;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setCrm(String crm) {
+		this.crm = crm;
 	}
 
+	public String getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(String especialidade) {
+		this.especialidade = especialidade;
+	}
 
 	public boolean isAtivo() {
 		return ativo;
@@ -147,6 +172,14 @@ public class Paciente {
 	}
 	
 	
+
+	 
+	
+	
+	 
+	
 	
 	
 }
+
+	 
