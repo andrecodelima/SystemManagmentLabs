@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name="pacientes")
@@ -24,10 +26,14 @@ public class Paciente {
 	private String cpf;
 	
 	@Column
+    @Temporal(TemporalType.DATE)
 	private LocalDate nascimento;
 	
 	@Column
 	private String genero;
+	
+	@Column
+	private String telefone;
 	
 	@Column
 	private String email;
@@ -36,41 +42,36 @@ public class Paciente {
 	private String endereco;
 	
 	@Column
-	private String telefone;
-	
-	@Column
 	private boolean ativo;
 
 	public Paciente() {
 		super();
 	}
 
-	public Paciente(int id, String nome, String cpf, LocalDate nascimento, String genero, String email, String endereco,
-			String telefone) {
+	public Paciente(int id, String nome, String cpf, LocalDate nascimento, String genero, String telefone, String email, String endereco
+			) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.nascimento = nascimento;
 		this.genero = genero;
+		this.telefone = telefone;
 		this.email = email;
 		this.endereco = endereco;
-		this.telefone = telefone;
 	}
 	
-	public Paciente(String nome, String cpf, LocalDate nascimento, String genero, String email, String endereco,
-			String telefone) {
+	public Paciente(String nome, String cpf, LocalDate nascimento, String genero, String telefone, String email, String endereco
+			) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.nascimento = nascimento;
 		this.genero = genero;
+		this.telefone = telefone;
 		this.email = email;
 		this.endereco = endereco;
-		this.telefone = telefone;
 	}
-	
-	
 
 	public int getId() {
 		return id;
@@ -95,7 +96,7 @@ public class Paciente {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+
 	public LocalDate getNascimento() {
 		return nascimento;
 	}
@@ -111,7 +112,14 @@ public class Paciente {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-	
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
 	public String getEmail() {
 		return email;
@@ -129,15 +137,6 @@ public class Paciente {
 		this.endereco = endereco;
 	}
 
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -146,6 +145,9 @@ public class Paciente {
 		this.ativo = ativo;
 	}
 	
+	
+
+ 
 	
 	
 	

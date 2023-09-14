@@ -216,20 +216,6 @@
 
 <script>
 
-	//mascaras
-	$(document).ready(function(){
-	
-	 $("#telefone").mask("99 9999-9999");
-	 $("#cpf").mask("999.999.999-99");
-   $("#data").mask("99/99/9999");
-
-	
-	});
-	// Calendar
-	$("#data").datepicker({
-		dateFormat: "dd/mm/yy"
-	});
-
   
 </script>
 

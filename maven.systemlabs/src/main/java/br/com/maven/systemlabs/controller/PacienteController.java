@@ -72,9 +72,10 @@ public class PacienteController extends HttpServlet {
 				  							request.getParameter("inputCpf"),
 				  							data,
 				  							request.getParameter("inputGenero"),
+				  							request.getParameter("inputTelefone"),
 				  							request.getParameter("inputEmail"),
-				  							request.getParameter("inputEndereco"),
-				  							request.getParameter("inputTelefone")
+				  							request.getParameter("inputEndereco")
+				  							
 				  						  );
 				  
 		 if(PacienteServices.insertPaciente(paciente)){
@@ -96,11 +97,12 @@ public class PacienteController extends HttpServlet {
 				  								Integer.parseInt(request.getParameter("id")),
 				  								request.getParameter("inputNome"),
 				  								request.getParameter("inputCpf"),
-				  								LocalDate.parse(request.getParameter("inputData")),
+				  								LocalDate.parse(request.getParameter("inputNascimento")),
 				  								request.getParameter("inputGenero"),
+				  								request.getParameter("inputTelefone"),
 				  								request.getParameter("inputEmail"),
-				  								request.getParameter("inputEndereco"),
-				  								request.getParameter("inputTelefone")
+				  								request.getParameter("inputEndereco")
+				  								
 				  					);
 		  /*    
 		    	* Chamada 	- PacienteServices 'chama' o método updatePaciente que requer um parâmetro.
@@ -120,6 +122,11 @@ public class PacienteController extends HttpServlet {
 	 
 	public void DelPaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		  /** Tratamento de Dados
+		   * O Método ParseInt da classe Integer converte o parâmetro 'id' de uma String para um
+		   * 	número Inteiro. Isso é necessário porque o método 'delPaciente()' espera um
+		   * 	número inteiro como argumento.*/
+		
 		  if(PacienteServices.delPaciente(Integer.parseInt(request.getParameter("id")))) {
 				 response.getWriter().append("Paciente DELETADO com sucesso");
 

@@ -49,39 +49,39 @@ public class Medico {
 
 	public Medico(){}
 
-	public Medico(int id, String nome, LocalDate nascimento, String genero, String cpf, String telefone, String email,
-			String endereco, String crm, String especialidade, boolean ativo) {
+	public Medico(int id, String nome, String cpf, LocalDate nascimento, String genero,  String telefone, String email,
+			String endereco, String crm, String especialidade) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.cpf = cpf;
 		this.nascimento = nascimento;
 		this.genero = genero;
-		this.cpf = cpf;
 		this.telefone = telefone;
 		this.email = email;
 		this.endereco = endereco;
 		this.crm = crm;
 		this.especialidade = especialidade;
-		this.ativo = ativo;
 
 
 	}
 
-	public Medico(String nome, LocalDate nascimento, String genero, String cpf, String telefone, String email,
-			String endereco, String crm, String especialidade, boolean ativo) {
+	public Medico(String nome, String cpf, LocalDate nascimento, String genero,  String telefone, String email,
+			String endereco, String crm, String especialidade) {
 		super();
 		this.nome = nome;
+		this.cpf = cpf;
 		this.nascimento = nascimento;
 		this.genero = genero;
-		this.cpf = cpf;
 		this.telefone = telefone;
 		this.email = email;
 		this.endereco = endereco;
 		this.crm = crm;
 		this.especialidade = especialidade;
-		this.ativo = ativo;
+
 
 	}
+
 
 	public int getId() {
 		return id;

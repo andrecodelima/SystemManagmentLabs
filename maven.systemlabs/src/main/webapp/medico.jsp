@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
 <%@ page import= "java.text.DateFormat" %>
@@ -5,20 +6,63 @@
 
 <%@ page import= "java.util.ArrayList" %>
 
-<%@ page import="br.com.maven.systemlabs.model.Paciente"%>
-<%@ page import="br.com.maven.systemlabs.service.PacienteServices"%>
+<%@ page import="br.com.maven.systemlabs.model.Medico"%>
+<%@page import="br.com.maven.systemlabs.service.MedicoServices"%>
 
 <%
-	 Paciente paciente = PacienteServices.getId(Integer.parseInt(request.getParameter("id")));
+	ArrayList<Medico> lista = MedicoServices.getAllMedicos();
+	String line = "";
+	
+	if(lista.isEmpty()){
+		line = "<tr><th colspan='8'> Não há pacientes cadastrados </tr></th>";
+
+	}else{
+		
+		for(Medico m : lista){
+			
+			 int id						= m.getId();
+			 String nome 				= m.getNome();
+			 String cpf					= m.getCpf();
+			 LocalDate nascimento		= m.getNascimento();
+			 String genero				= m.getGenero();
+			 String telefone			= m.getTelefone();
+			 String email				= m.getEmail();
+			 String endereco			= m.getEndereco();
+			 String crm					= m.getCrm();
+			 String especialidade		= m.getEspecialidade();
+		
+		
+		line += "<tr>"					+
+		
+				"<td>"					+ id				+ "</td>"		+
+				"<td>"					+ nome				+ "</td>"		+
+				"<td>"					+ cpf				+ "</td>"		+
+				"<td>"					+ nascimento		+ "</td>"		+
+				"<td>"					+ genero			+ "</td>"		+
+				"<td>"					+ telefone			+ "</td>"		+
+				"<td>"					+ email				+ "</td>"		+
+				"<td>"					+ endereco			+ "</td>"		+
+				"<td>"					+ crm				+ "</td>"		+
+				"<td>"					+ especialidade		+ "</td>"		+
+
+				
+				"<td><a class='btn btn-warning' href='#"						 + id + "'>Editar</a></td>"  	+
+				"<td><a class='btn btn-danger'  href='deleteMedico?id="		 	 + id + "'>Excluir</a></td>"  	+
+				
+				"</tr>";
+		}
+		
+		
+	}
 
 %>
 
 <!DOCTYPE html>
-<html lang="pt-Br">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paciente</title>
+  <title>Pacientes</title>
    
    <!-- Style - BS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -44,11 +88,7 @@
         max-width: 960px;
       }
 
-    #form{
-      width: 60vw;
-      margin-left: -56px;
-    }
-
+    
     .mb-3{
       margin-left: -56px;
 
@@ -63,6 +103,12 @@
 
     display: flex;
     justify-content: space-evenly;
+
+    .mb-3{
+      background-color: #dcdcdd;
+      padding: 11px;
+      width: 100%;
+    }
 }
 
    </style>
@@ -112,88 +158,39 @@
 <main class="main">
   <section class="box-register">
     <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">Médico</h4>
+     <h4 class="mb-3">Pacientes</h4>
+  
 
-      <!-- FormulÃ¡rio de Cadastro -->
-      <form class="needs-validation" id="form" name="formCadastro" novalidate action ="updatePaciente">
-        <div class="row g-3">
-
-          <div class="col-sm-4">
-            <label for="firstName" class="form-label">Nome Completo</label>
-            <input type="text" class="form-control" id="nome" name="inputNome" placeholder="Nome Completo" value="<%=paciente.getNome()%>" required>
-            <div class="invalid-feedback">
-                Por favor informe o nome
-            </div>
-          </div>
-
-          <div class="col-2">
-            <label for="username" class="form-label">CPF</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="cpf" name="inputCpf" placeholder="999.999.999-99" value="<%=paciente.getCpf()%>" required>
-            <div class="invalid-feedback">
-              Por favor informe o CPF
-              </div>
-            </div>
-          </div>
-
-          <div class="col-2">
-            <label for="username" class="form-label">Data de nascimento</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="data" name="inputNascimento" value="<%=paciente.getNascimento()%>" required>
-            <div class="invalid-feedback">
-              Por favor informe sua data de nascimento
-              </div>
-            </div>
-          </div>
-
-		      <div class="col-md-2">
-            <label for="state" class="form-label">Gênero</label>
-            <select class="form-select" id="genero" name="inputGenero" value="<%=paciente.getGenero()%>" required>
-              <option disabled>Escolha...</option>
-              <option value="feminino">Feminino</option>
-              <option value="masculino">Masculino</option>
-            </select>
-            <div class="invalid-feedback">
-              Por favor selecione um gênero
-            </div>
-          </div>
-
-          <div class="col-2">
-            <label for="username" class="form-label">Telefone</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="telefone" name="inputTelefone" value="<%=paciente.getTelefone()%>" required>
-            <div class="invalid-feedback">
-              Por favor informe o telefone
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-4">
-            <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-            <input type="email" class="form-control" id="email" name="inputEmail" placeholder="nomedoemail@example.com" value="<%=paciente.getEmail()%>">
-            <div class="invalid-feedback">
-              Por favor insira seu email
-            </div>
-          </div>
-
-          <div class="col-4">
-            <label for="address" class="form-label">Endereço</label>
-            <input type="text" class="form-control" id="endereco" name="inputEndereco" placeholder="" value="<%=paciente.getEndereco()%>" required>
-            <div class="invalid-feedback">
-              Por favor insira seu endereço
-            </div>
+      <table class="table-responsive-lg">
+        <thead>
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Nascimento</th>
+            <th scope="col">Gênero</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Endereço</th>
+            <th scope="col">Crm</th>
+            <th scope="col">Especialidade</th>
             
- 			<input type="hidden" name="id" value="<%=paciente.getId()%>">
-          </div>
-
-        </div>
-
-        <hr class="my-4">
-        <button class="w-30 btn btn-primary btn-lg" type="submit">Salvar</button>
+          </tr>
+        </thead>
         
-      </form>
-      <!-- Fim formulÃ¡rio cadastro -->
+        <tbody class="table-group-divider">
+          <tr>
+            <th><%=line %></th>     
+          </tr>
+        </tbody>
+        
+        <tfoot>
+        	<tr>
+        		<th colspan=10>Fim da lista</th>
+        	</tr>
+        </tfoot>
+        
+      </table>
 
     </div>
   </section>
@@ -227,12 +224,6 @@
 </body>
 
 <script>
-
-	// Calendar
-	$("#data").datepicker({
-		dateFormat: "dd/mm/yy"
-	});
-
   
 </script>
 
