@@ -14,6 +14,17 @@ public class PacienteServices {
 	//INSERE
 	public static boolean insertPaciente(Paciente paciente) {
 		
+			/* 
+		 	  # Conexão com o banco
+			  	
+			  *  Através da Classe Conection num primeiro momnento fazemos a CONEXÃO com o banco, passando para a variavel, 'conn'
+			  *  	o método 'conect()' criado no pacote de serviços. Esse método possui todas as informações de acesso ao banco de 
+			  *  	dados.  
+			  *  
+			  *  Ela também é usada para inserção, atualização e exclusão de dados.
+			  *   
+            */
+		
 		Connection conn 		= Db.conect();
 		LocalDate nascimento	= paciente.getNascimento();
 		                            
@@ -145,8 +156,6 @@ public class PacienteServices {
 						"WHERE id 		= 			?"			;
 		
 		try {
-			
-			
 			
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, p.getNome());

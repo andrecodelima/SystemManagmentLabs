@@ -16,7 +16,7 @@ import br.com.maven.systemlabs.service.MedicoServices;
  
 
  
-@WebServlet(urlPatterns = {  "/acessoCadastroMedico", "/NewMedico", "/deleteMedico" })
+@WebServlet(urlPatterns = {  "/acessoCadastroMedico", "/NewMedico", "/deleteMedico", "/updateMedico" })
 public class MedicoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,10 +42,12 @@ public class MedicoController extends HttpServlet {
 		case "/deleteMedico":
 			DelMedico(request, response);
 			break;
+			
+		case "/updateMedico":
+			UpdateMedico(request, response);
+			break;
 	
 		}
-
- 
 
 	}
 	
@@ -93,10 +95,7 @@ public class MedicoController extends HttpServlet {
 	 
 	public void DelMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		  /** Tratamento de Dados
-		   * O Método ParseInt da classe Integer converte o parâmetro 'id' de uma String para um
-		   * 	número Inteiro. Isso é necessário porque o método 'delMedico()' espera um
-		   * 	número inteiro como argumento.*/
+	 
 		  if(MedicoServices.delMedico(Integer.parseInt(request.getParameter("id")))) {
 				 response.getWriter().append("Medico DELETADO com sucesso");
 
@@ -108,6 +107,30 @@ public class MedicoController extends HttpServlet {
 	}
 	
 
+	public void UpdateMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		 Medico medico = new Medico(
+				 						Integer.parseInt(request.getParameter("id")),
+				 						request.getParameter("inputNome"),
+				 						request.getParameter("inputCpf"),
+				 						LocalDate.parse(request.getParameter("inputNascimento")),
+				 						request.getParameter("inputGenero"),
+				 						request.getParameter("inputTelefone"),
+				 						request.getParameter("inputEmail"),
+				 						request.getParameter("inputEndereco"),
+				 						request.getParameter("inputCrm"),
+				 						request.getParameter("inputEspecialidade")
+				 						
+				 					);
+		 
+		 if(MedicoServices.updateMedico(medico)) {
+			 response.getWriter().append("Medico ATUALIZADO com sucesso");
+
+		 }else {
+			 response.getWriter().append("Falha AO ATUALIZAR médico");
+ 
+		 }
+	}
 	
 	
 	

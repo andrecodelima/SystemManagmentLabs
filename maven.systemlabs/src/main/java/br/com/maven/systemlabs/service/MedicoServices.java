@@ -7,8 +7,6 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import com.mysql.cj.protocol.Resultset;
-
 import br.com.maven.systemlabs.model.Medico;
 
 public class MedicoServices {
@@ -108,8 +106,7 @@ public class MedicoServices {
 		
 		try {
 			
-			String sql = "SELECT * FROM medicos "
-						+ "WHERE id=" + id; 
+			String sql = "SELECT * FROM medicos WHERE id=" + id; 
 			
 			Statement st 		= conn.createStatement();
 			ResultSet result 	= st.executeQuery(sql);
@@ -135,6 +132,8 @@ public class MedicoServices {
 			st.close();
 			Db.Disconnect(conn);
 			
+			return medico;
+			
 		}catch (Exception e) {
 			System.out.println(e);
 
@@ -144,7 +143,6 @@ public class MedicoServices {
 	}
 	
 	//DELETE
-	
 	public static boolean delMedico(int id) {
 		
 		Connection conn = Db.conect();
@@ -166,14 +164,70 @@ public class MedicoServices {
 			
 		}catch (Exception e) {
 			System.out.println(e);
-
 			
 		}
 		
+		return false;
+	}
+	
+	
+	//UPDATE
+	
+	public static boolean updateMedico(Medico medico) {
 		
+		Connection conn = Db.conect();
+		LocalDate nascimento	= medico.getNascimento();
+		
+		if(conn == null) {
+			System.err.println("Falha na conexão");
+
+		}
+
+		String sql = "UPDATE medicos "							+
+		
+						 "SET nome			=		?," 		+
+						 "nascimento		=		?," 		+
+						 "genero			=		?,"			+
+						 "cpf				=		?,"			+
+						 "telefone			=		?,"			+
+						 "email				=		?,"			+
+						 "endereco			=		?,"			+
+						 "crm				=		?,"			+
+						 "especialidade		=		?"			+
+						 
+						 "WHERE id			=		?"			;
+				
+		try {
+			
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, medico.getNome());
+			st.setString(2, medico.getCpf());
+			st.setObject(3, nascimento);
+			st.setString(4, medico.getGenero());
+			st.setString(5, medico.getTelefone());
+			st.setString(6, medico.getEmail());
+			st.setString(7, medico.getEndereco());
+			st.setString(8, medico.getCrm());
+			st.setString(9, medico.getEspecialidade());
+			
+			st.setInt(10, medico.getId());
+			
+			st.execute();
+			System.out.print("Medico atualizado");
+
+			st.close();
+			Db.Disconnect(conn);
+			
+			return true;
+			
+		}catch (Exception e) {
+			System.out.println(e);
+			
+		}
 		
 		return false;
 	}
+	
 	
 	
 }

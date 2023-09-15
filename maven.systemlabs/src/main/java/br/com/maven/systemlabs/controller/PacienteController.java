@@ -121,11 +121,15 @@ public class PacienteController extends HttpServlet {
 	}
 	 
 	public void DelPaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		  /** Tratamento de Dados
-		   * O Método ParseInt da classe Integer converte o parâmetro 'id' de uma String para um
-		   * 	número Inteiro. Isso é necessário porque o método 'delPaciente()' espera um
-		   * 	número inteiro como argumento.*/
+		
+		    /* 
+		 	  # Tratamento de Dados
+			  	
+			  *  O Método ParseInt da classe Integer converte o parâmetro 'id' de uma String para um
+			  * 	número Inteiro. Isso é necessário porque o método 'delPaciente()' espera um
+			  * 	número inteiro como argumento.
+			  *   
+            */
 		
 		  if(PacienteServices.delPaciente(Integer.parseInt(request.getParameter("id")))) {
 				 response.getWriter().append("Paciente DELETADO com sucesso");
