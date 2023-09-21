@@ -201,9 +201,9 @@ public class MedicoServices {
 			
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, medico.getNome());
-			st.setString(2, medico.getCpf());
-			st.setObject(3, nascimento);
-			st.setString(4, medico.getGenero());
+			st.setObject(2, nascimento);
+			st.setString(3, medico.getGenero());
+			st.setString(4, medico.getCpf());
 			st.setString(5, medico.getTelefone());
 			st.setString(6, medico.getEmail());
 			st.setString(7, medico.getEndereco());
@@ -221,7 +221,7 @@ public class MedicoServices {
 			return true;
 			
 		}catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Falha ao atualizar "+ e);
 			
 		}
 		
