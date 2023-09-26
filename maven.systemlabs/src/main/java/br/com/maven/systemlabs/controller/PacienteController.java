@@ -84,7 +84,7 @@ public class PacienteController extends HttpServlet {
 
 		 }else {
 			 response.getWriter().append("Falha ao CADASTRAR paciente");
-				System.out.println("Cadastrado");
+				System.out.println("falha no cadastro do paciente");
 
 		 }
 		  

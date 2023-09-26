@@ -10,6 +10,26 @@
 <%
 	ArrayList<Paciente> listaPaciente = PacienteServices.getAllPacientes();
 	ArrayList<Medico>	listaMedico	  = MedicoServices.getAllMedicos();
+	String linePaciente = "";
+	String lineMedico = "";
+
+	
+	
+	for(Paciente paciente : listaPaciente){
+		
+		int id = paciente.getId();
+		String nome = paciente.getNome();
+		
+		linePaciente += "<option value=\"" + id + "\">" + nome + "</option>";
+	}
+	
+	for(Medico medico : listaMedico ){
+		
+		int id = medico.getId();
+		String nome = medico.getNome();
+		
+		lineMedico +="<option value=\"" + id + "\">" + nome + "</option>";
+	}
 
 %>
 
@@ -103,7 +123,7 @@
       <h4 class="mb-3">Cadastro</h4>
 
       <!-- FormulÃ¡rio de Cadastro -->
-      <form class="needs-validation" id="form" name="formCadastro" novalidate action ="NewExame">
+      <form class="needs-validation" id="form" name="formCadastro" novalidate action ="newExame">
         <div class="row g-3">        
           <div class="col-sm-10">
             <label for="firstName" class="form-label">Nome do Exame</label>
@@ -129,9 +149,9 @@
 		<div class="row g-3">
 		  <div class="col-md-5">
             <label for="state" class="form-label">Paciente</label>
-            <select class="form-select" id="paciente" name="inputPaciente" required>
-              <option disabled>Escolha...</option>
-              <option value="1">teste</option>
+            <select class="form-select" id="paciente" name="inputPaciente"  required>
+              <option value=0>Escolha...</option>
+              <%=linePaciente %>
             </select>
             <div class="invalid-feedback">
               Por favor selecione um paciente
@@ -141,8 +161,8 @@
 		<div class="col-md-5">
             <label for="state" class="form-label">Medico</label>
             <select class="form-select" id="medico" name="inputMedico" required>
-              <option disabled>Escolha...</option>
-              <option value="1">teste</option>
+              <option value=0>Escolha...</option>
+              <%=lineMedico %>
             </select>
             <div class="invalid-feedback">
               Por favor selecione um medico
@@ -153,7 +173,7 @@
         </div>
 
         <hr class="my-4">
-        <button class="w-30 btn btn-primary btn-lg" type="submit">Cadastrar</button>
+        <button class="w-30 btn btn-primary btn-lg" type="button" onclick="validaCadastro()">Cadastrar</button>
       </form>
       <!-- Fim formulÃ¡rio cadastro -->
 
@@ -203,6 +223,7 @@
 	$("#data").datepicker({
 		dateFormat: "dd/mm/yy"
 	});
+
 
   
 </script>

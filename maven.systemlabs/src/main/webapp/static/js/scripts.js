@@ -52,8 +52,6 @@
 
 	 }
 	 
- 	
- 
  }
 
  //Valida Form - Cadastro Cliente (ESTUDAR)
@@ -76,3 +74,19 @@
 	  }, false)
 	})
   })()
+
+
+
+  function validaCadastro(){
+	 
+	 let option1 = document.getElementById('paciente').value;
+	 let option2 = document.getElementById('medico').value;
+
+	 if(option1 == 0 || option2 == 0){
+		alert("Escolha uma opção válida"); 
+	 }else{
+		 formCadastro.submit();
+	 }
+		  
+ 
+ }

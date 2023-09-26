@@ -16,7 +16,7 @@ import br.com.maven.systemlabs.service.MedicoServices;
  
 
  
-@WebServlet(urlPatterns = {  "/acessoCadastroMedico", "/NewMedico", "/deleteMedico", "/updateMedico" })
+@WebServlet(urlPatterns = {  "/acessoCadastroMedico", "/newMedico", "/deleteMedico", "/updateMedico" })
 public class MedicoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,26 +32,26 @@ public class MedicoController extends HttpServlet {
 		switch (address) {
 		
 		case "/acessoCadastroMedico":
-			AcessoCadastroMedico(request, response);
+			acessoCadastroMedico(request, response);
 			break;
 		
-		case "/NewMedico":
+		case "/newMedico":
 			insertMedico(request, response);
 			break;
 			
 		case "/deleteMedico":
-			DelMedico(request, response);
+			delMedico(request, response);
 			break;
 			
 		case "/updateMedico":
-			UpdateMedico(request, response);
+			updateMedico(request, response);
 			break;
 	
 		}
 
 	}
 	
-	public void AcessoCadastroMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void acessoCadastroMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		 response.sendRedirect("cadastroMedico.html");
 		 
@@ -85,15 +85,15 @@ public class MedicoController extends HttpServlet {
 				System.out.println("Cadastrado");
 
 		 }else {
-			 response.getWriter().append("Falha no cadastro");
-				System.out.println("Cadastrado");
+			 response.getWriter().append("Falha no cadastro do médico");
+				System.out.println("Falha no cadastro");
 
 		 }
 		  
 	}
 	
 	 
-	public void DelMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void delMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	 
 		  if(MedicoServices.delMedico(Integer.parseInt(request.getParameter("id")))) {
@@ -107,7 +107,7 @@ public class MedicoController extends HttpServlet {
 	}
 	
 
-	public void UpdateMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void updateMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		 Medico medico = new Medico(
 				 						Integer.parseInt(request.getParameter("id")),

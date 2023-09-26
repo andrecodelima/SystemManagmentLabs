@@ -45,6 +45,15 @@ public class Exame {
 		this.id_medico = id_medico;
 	}
 
+	
+	public Exame(String nome, LocalDate data, int id_paciente, int id_medico) {
+		super();
+		this.nome = nome;
+		this.data = data;
+		this.id_paciente = id_paciente;
+		this.id_medico = id_medico;
+	}
+
 	public int getId() {
 		return id;
 	}
