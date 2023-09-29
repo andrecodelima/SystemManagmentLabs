@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.maven.systemlabs.model.Exame;
-import br.com.maven.systemlabs.service.ExameService;
+import br.com.maven.systemlabs.service.ExameServices;
 
  
 @WebServlet(urlPatterns = {"/acessoCadastroExame", "/newExame"})
@@ -67,7 +67,7 @@ public class ExameController extends HttpServlet {
 				  
 				  );  
 		  
-		  if(ExameService.insertExame(exame)) {
+		  if(ExameServices.insertExame(exame)) {
 			  response.getWriter().append("Exame cadastrado com sucesso");
 				System.out.println("Cadastrado");
 		  }else {

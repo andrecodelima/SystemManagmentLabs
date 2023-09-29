@@ -1,9 +1,63 @@
+<%@ page import="br.com.maven.systemlabs.model.Medico"%>
+<%@ page import="br.com.maven.systemlabs.service.MedicoServices"%>
+<%@ page import="br.com.maven.systemlabs.model.Paciente"%>
+<%@ page import="br.com.maven.systemlabs.service.PacienteServices"%>
+<%@ page import="br.com.maven.systemlabs.model.Exame"%>
+<%@ page import="br.com.maven.systemlabs.service.ExameServices"%>
+
+
+<%@ page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+
+
+
+<%
+	ArrayList<Paciente> listaPaciente = PacienteServices.getAllPacientes();
+	ArrayList<Medico>	listaMedico	  = MedicoServices.getAllMedicos();
+	ArrayList<Exame>	listaExame	  = ExameServices.getAllExames();
+			
+	String linePaciente = "";
+	String lineMedico = "";
+	String lineExame = "";
+
+	System.out.print(listaPaciente);
+	System.out.print(listaMedico);
+	System.out.print(listaExame);
+
+	
+	for(Paciente paciente : listaPaciente){
+		
+		int id = paciente.getId();
+		String nome = paciente.getNome();
+		
+		linePaciente += "<option value=\"" + id + "\">" + nome + "</option>";
+	}
+	
+	for(Medico medico : listaMedico ){
+		
+		int id = medico.getId();
+		String nome = medico.getNome();
+		
+		lineMedico +="<option value=\"" + id + "\">" + nome + "</option>";
+	}
+	
+	for(Exame exame : listaExame ){
+		
+		int id = exame.getId();
+		String nome = exame.getNome();
+		
+		lineExame +="<option value=\"" + id + "\">" + nome + "</option>";
+	}
+
+%>
+
 <!DOCTYPE html>
 <html lang="pt-Br">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro | Paciente</title>
+  <title>Cadastro | Exame</title>
    
    <!-- Style - BS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -85,84 +139,64 @@
 <main class="main">
   <section class="box-register">
     <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">Cadastro | Paciente</h4>
+      <h4 class="mb-3">Cadastro | Agendamento</h4>
 
-      <!-- Formulário de Cadastro -->
-      <form class="needs-validation" id="form" name="formCadastro" novalidate action ="NewPaciente">
-        <div class="row g-3">
-          <div class="col-sm-10">
-            <label for="firstName" class="form-label">Nome Completo</label>
-            <input type="text" class="form-control" id="nome" name="inputNome" placeholder="Nome Completo" value="" required>
-            <div class="invalid-feedback">
-              Por favor insira o nome completo
-            </div>
-          </div>
+      <!-- FormulÃ¡rio de Cadastro -->
+      <form class="needs-validation" id="form" name="formCadastro" novalidate action ="newAgendamento">
 
+ 		<div class="row g-3">
           <div class="col-5">
-            <label for="username" class="form-label">CPF</label>
+            <label for="username" class="form-label">Data</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" id="cpf" name="inputCpf" placeholder="999.999.999-99" required>
+              <input type="text" class="form-control" id="data" name="inputData" placeholder="00/00/0000" required>
             <div class="invalid-feedback">
-              Por favor informe o CPF
+              Por favor informe a data do agendamento
               </div>
             </div>
           </div>
-
-          <div class="col-5">
-            <label for="username" class="form-label">Data de nascimento</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="data" name="inputNascimento" placeholder="00/00/0000" required>
-            <div class="invalid-feedback">
-              Por favor informe sua data de nascimento
-              </div>
-            </div>
-          </div>
-
-		      <div class="col-md-5">
-            <label for="state" class="form-label">Gênero</label>
-            <select class="form-select" id="genero" name="inputGenero" required>
-              <option disabled>Escolha...</option>
-              <option value="feminino">Feminino</option>
-              <option value="masculino">Masculino</option>
+		</div><br>
+		
+		<div class="row g-3">
+		  <div class="col-md-5">
+            <label for="state" class="form-label">Paciente</label>
+            <select class="form-select" id="paciente" name="inputPaciente"  required>
+              <option value=0>Escolha...</option>
+              <%=linePaciente %>
             </select>
             <div class="invalid-feedback">
-              Por favor selecione um gênero
+              Por favor selecione um paciente
             </div>
           </div>
 
-          <div class="col-5">
-            <label for="username" class="form-label">Telefone</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="telefone" name="inputTelefone" placeholder="(00) 0000-0000" required>
+		 <div class="col-md-5">
+            <label for="state" class="form-label">Medico</label>
+            <select class="form-select" id="medico" name="inputMedico" required>
+              <option value=0>Escolha...</option>
+              <%=lineMedico %>
+            </select>
             <div class="invalid-feedback">
-              Por favor informe o telefone
-              </div>
+              Por favor selecione um medico
             </div>
           </div>
-
-
-          <div class="col-10">
-            <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-            <input type="email" class="form-control" id="email" name="inputEmail" placeholder="nomedoemail@example.com">
+          
+          <div class="col-md-5">
+            <label for="state" class="form-label">Exame</label>
+            <select class="form-select" id="exame" name="inputExame" required>
+              <option value=0>Escolha...</option>
+              <%=lineExame %>
+            </select>
             <div class="invalid-feedback">
-              Por favor insira seu email
+              Por favor selecione um exame
             </div>
           </div>
-
-          <div class="col-10">
-            <label for="address" class="form-label">Endereço</label>
-            <input type="text" class="form-control" id="endereco" name="inputEndereco" placeholder="" required>
-            <div class="invalid-feedback">
-              Por favor insira seu endereço
-            </div>
-          </div>
+          
 
         </div>
 
         <hr class="my-4">
-        <button class="w-30 btn btn-primary btn-lg" type="submit">Cadastrar</button>
+        <button class="w-30 btn btn-primary btn-lg" type="button" onclick="validaCadastro()">Cadastrar</button>
       </form>
-      <!-- Fim formulário cadastro -->
+      <!-- Fim formulÃ¡rio cadastro -->
 
     </div>
   </section>
@@ -182,7 +216,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <!-- JS Local --> 
-<!-- Para as mascaras funcionarem é preciso que as chamadas fiquem nessa ordem -->
+<!-- Para as mascaras funcionarem Ã© preciso que as chamadas fiquem nessa ordem -->
 <script src="./static/js/jquery.js"></script>
 <script src="./static/js/scripts.js"></script>
 <script src="./static/js/jquery.maskedinput.min.js"></script> 
@@ -210,6 +244,7 @@
 	$("#data").datepicker({
 		dateFormat: "dd/mm/yy"
 	});
+
 
   
 </script>
