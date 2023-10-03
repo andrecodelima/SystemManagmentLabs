@@ -2,7 +2,7 @@ package br.com.maven.systemlabs.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import br.com.maven.systemlabs.model.Agendamento;
 
@@ -11,14 +11,14 @@ public class AgendamentoServices {
 	public static boolean insertAgendamento(Agendamento agendamento) {
 		
 		Connection conn = Db.conect();
-		LocalDate data = agendamento.getData();
+		LocalDateTime dataHora = agendamento.getDataHora();
 		
 		try {
 			
 			String sql = "INSERT INTO agendamentos(data, id_paciente, id_medico, id_exame) VALUES(?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			
-			st.setObject(1, data);
+			st.setObject(1, dataHora);
 			st.setInt(2, agendamento.getId_paciente());
 			st.setInt(3, agendamento.getId_medico());
 			st.setInt(4, agendamento.getId_exame());

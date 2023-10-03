@@ -2,6 +2,8 @@ package br.com.maven.systemlabs.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
@@ -55,11 +57,15 @@ public class AgendamentoController extends HttpServlet {
 	protected void insertAgendamento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
 		 String datOriginal = request.getParameter("inputData");
+		 String horaOriginal = request.getParameter("inputHora");
 		 LocalDate data = LocalDate.parse(datOriginal, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		 LocalTime hora = LocalTime.parse(horaOriginal, DateTimeFormatter.ofPattern("HH:mm"));
+		 
+		 LocalDateTime dataHora = LocalDateTime.of(data, hora);
 		 
 		 Agendamento agendamento = new Agendamento(
 				 
-				 	data,
+				 	dataHora,
 				 	Integer.parseInt(request.getParameter("inputPaciente")),
 				 	Integer.parseInt(request.getParameter("inputMedico")),
 				 	Integer.parseInt(request.getParameter("inputExame"))

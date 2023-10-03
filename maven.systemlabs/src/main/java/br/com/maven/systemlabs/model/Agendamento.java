@@ -1,6 +1,6 @@
 package br.com.maven.systemlabs.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,7 +14,7 @@ public class Agendamento {
 	private int id;
 	
 	@Column
-	private LocalDate data;
+	private LocalDateTime dataHora;
 	
 	@Column
 	private int id_paciente;
@@ -27,18 +27,18 @@ public class Agendamento {
 	
 	public Agendamento() {}
 
-	public Agendamento(int id, LocalDate data, int id_paciente, int id_medico, int id_exame) {
+	public Agendamento(int id, LocalDateTime dataHora, int id_paciente, int id_medico, int id_exame) {
 		super();
 		this.id = id;
-		this.data = data;
+		this.dataHora = dataHora;
 		this.id_paciente = id_paciente;
 		this.id_medico = id_medico;
 		this.id_exame = id_exame;
 	}
 
-	public Agendamento(LocalDate data, int id_paciente, int id_medico, int id_exame) {
+	public Agendamento(LocalDateTime dataHora, int id_paciente, int id_medico, int id_exame) {
 		super();
-		this.data = data;
+		this.dataHora = dataHora;
 		this.id_paciente = id_paciente;
 		this.id_medico = id_medico;
 		this.id_exame = id_exame;
@@ -52,12 +52,12 @@ public class Agendamento {
 		this.id = id;
 	}
 
-	public LocalDate getData() {
-		return data;
+	public LocalDateTime getDataHora() {
+		return dataHora;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setData(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
 	}
 
 	public int getId_paciente() {

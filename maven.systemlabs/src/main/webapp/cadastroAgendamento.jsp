@@ -154,6 +154,16 @@
               </div>
             </div>
           </div>
+          
+          <div class="col-5">
+            <label for="username" class="form-label">Horário</label>
+            <div class="input-group has-validation">
+              <input type="text" class="form-control" id="hora" name="inputHora" placeholder="00:00" required>
+            <div class="invalid-feedback">
+              Por favor informe a horário do agendamento
+              </div>
+            </div>
+          </div>
 		</div><br>
 		
 		<div class="row g-3">
@@ -236,8 +246,8 @@
 	
 	 $("#telefone").mask("99 9999-9999");
 	 $("#cpf").mask("999.999.999-99");
-   $("#data").mask("99/99/9999");
-
+     $("#data").mask("99/99/9999");
+     $("#hora").mask("99:99");
 	
 	});
 	// Calendar
