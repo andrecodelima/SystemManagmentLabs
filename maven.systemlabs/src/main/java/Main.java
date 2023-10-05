@@ -5,8 +5,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		//Teste Banco
-		Db.conect();
-		
+		Db conn = new Db();
+		conn.conect();
 
 	}
 
