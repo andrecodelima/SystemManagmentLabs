@@ -230,4 +230,45 @@ public class PacienteServices {
 		
 	} 
 	
+	
+	public static ArrayList<Paciente> getPacienteByName(String nome){
+		
+		Connection conn = Db.conect();
+		
+		try {
+			
+			String sql = "SELECT * FROM pacientes WHERE nome LIKE '%" + nome + "%'";
+			
+			Statement st = conn.createStatement();
+			ResultSet result = st.executeQuery(sql);
+			
+			ArrayList<Paciente> lista = new ArrayList<Paciente>();
+			
+			while(result.next()) {
+				lista.add(new Paciente(result.getInt("id"),
+										result.getString("nome"),
+										result.getString("cpf"),
+										result.getDate("nascimento").toLocalDate(),
+										result.getString("genero"),
+										result.getString("telefone"),
+										result.getString("email"),
+										result.getString("endereco")
+						
+						)
+					);
+			}
+			
+			Db.Disconnect(conn);
+			st.close();
+			
+			return lista;
+			
+		}catch (Exception e) {
+			System.out.println("Erro ao consultar nome " + e);
+
+		}
+		
+		return null;
+	}
+	
 }

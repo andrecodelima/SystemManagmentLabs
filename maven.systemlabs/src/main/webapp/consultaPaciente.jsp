@@ -6,30 +6,41 @@
 
 <%@ page import= "java.util.ArrayList" %>
 
-<%@ page import="br.com.maven.systemlabs.model.Medico"%>
-<%@page import="br.com.maven.systemlabs.service.MedicoServices"%>
+<%@ page import="br.com.maven.systemlabs.model.Paciente"%>
+<%@ page import="br.com.maven.systemlabs.service.PacienteServices"%>
 
 <%
-	ArrayList<Medico> lista = MedicoServices.getAllMedicos();
+	ArrayList<Paciente> lista = PacienteServices.getAllPacientes(); // Recuperando todos os pacientes
 	String line = "";
+	String nomes = request.getParameter("namePaciente"); // Recebendo o parâmetro enviado ao campo de pesquisa
 	
+	//Condição para saber qual método a lista vai receber.
+	if(nomes == null || nomes.equals("")){
+		lista = PacienteServices.getAllPacientes();
+	
+	}else{
+		lista = PacienteServices.getPacienteByName(nomes); /*O dado vem do formulário, é recuperado pela variável "nomes" 
+		e é essa variável é passada como parametro ao método getPacienteByName
+		Dentro do método, será executada a consulta com o argumento(valor)passado ao parâmetro(nomes)
+		*/
+		
+	}
+	
+ 
 	if(lista.isEmpty()){
-		line = "<tr><th colspan='8'> Não há médicos cadastrados </tr></th>";
+		line = "<tr><th colspan='8'> Nome não encontrado ou não existe </tr></th>";
 
 	}else{
 		
-		for(Medico m : lista){
-			
-			 int id						= m.getId();
-			 String nome 				= m.getNome();
-			 String cpf					= m.getCpf();
-			 LocalDate nascimento		= m.getNascimento();
-			 String genero				= m.getGenero();
-			 String telefone			= m.getTelefone();
-			 String email				= m.getEmail();
-			 String endereco			= m.getEndereco();
-			 String crm					= m.getCrm();
-			 String especialidade		= m.getEspecialidade();
+		for(Paciente p : lista){
+			 int id						= p.getId();
+			 String nome 				= p.getNome();
+			 String cpf					= p.getCpf();
+			 LocalDate nascimento		= p.getNascimento();
+			 String genero				= p.getGenero();
+			 String telefone			= p.getTelefone();
+			 String email				= p.getEmail();
+			 String endereco			= p.getEndereco();
 		
 		
 		line += "<tr>"					+
@@ -42,12 +53,6 @@
 				"<td>"					+ telefone			+ "</td>"		+
 				"<td>"					+ email				+ "</td>"		+
 				"<td>"					+ endereco			+ "</td>"		+
-				"<td>"					+ crm				+ "</td>"		+
-				"<td>"					+ especialidade		+ "</td>"		+
-
-				
-				"<td><a class='btn btn-warning' href='editMedico.jsp?id="		 + id + "'>Editar</a></td>"  	+
-				"<td><a class='btn btn-danger'  href='deleteMedico?id="		 	 + id + "'>Excluir</a></td>"  	+
 				
 				"</tr>";
 		}
@@ -62,7 +67,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medicos</title>
+  <title>Pacientes | Consulta</title>
    
    <!-- Style - BS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -158,8 +163,17 @@
 <main class="main">
   <section class="box-register">
     <div class="col-md-7 col-lg-8">
-     <h4 class="mb-3">Médicos</h4>
-  
+     <h4 class="mb-3">Pacientes</h4>
+  			<form action="consultaPaciente.jsp">
+				<div class="input-group mb-3">
+		  			<input type="text" class="form-control" name="namePaciente" placeholder="Pesquisar" aria-label="Recipient's username" aria-describedby="button-addon2">
+		 			 <button class="btn btn-primary" id="button-addon2">
+		 			 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+						  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+						</svg>
+		 			 </button>
+			 	</div>
+			 </form>
 
       <table class="table-responsive-lg">
         <thead>
@@ -172,9 +186,6 @@
             <th scope="col">Telefone</th>
             <th scope="col">E-mail</th>
             <th scope="col">Endereço</th>
-            <th scope="col">Crm</th>
-            <th scope="col">Especialidade</th>
-            
           </tr>
         </thead>
         
@@ -224,6 +235,7 @@
 </body>
 
 <script>
+
   
 </script>
 

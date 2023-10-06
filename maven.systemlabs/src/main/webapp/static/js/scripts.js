@@ -52,6 +52,44 @@
 
 	 }
 	 
- 	
+ }
+
+ //Valida Form - Cadastro Cliente (ESTUDAR)
+ // Example starter JavaScript for disabling form submissions if there are invalid fields
+ (() => {
+	'use strict'
+  
+	// Fetch all the forms we want to apply custom Bootstrap validation styles to
+	const forms = document.querySelectorAll('.needs-validation')
+  
+	// Loop over them and prevent submission
+	Array.from(forms).forEach(form => {
+	  form.addEventListener('submit', event => {
+		if (!form.checkValidity()) {
+		  event.preventDefault()
+		  event.stopPropagation()
+		}
+  
+		form.classList.add('was-validated')
+	  }, false)
+	})
+  })()
+
+
+
+  function validaCadastro(){
+	 
+	 let option1 = document.getElementById('nome').value;
+	 let option2 = document.getElementById('medico').value;
+	 let option3 = document.getElementById('paciente').value;
+
+	 if(option1 == 0 || option2 == 0 || option3 == 0){
+		alert("Escolha uma opção válida"); 
+	 }else{
+		 formCadastro.submit();
+	 }
+	 
+	 
+		  
  
  }

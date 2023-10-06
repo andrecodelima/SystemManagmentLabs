@@ -1,10 +1,12 @@
-<%@page import="br.com.maven.systemlabs.service.MedicoServices"%>
-<%@page import="br.com.maven.systemlabs.model.Medico"%>
-<%@page import="br.com.maven.systemlabs.service.PacienteServices"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
+<%@ page import="java.util.ArrayList"%>
+
+<%@ page import="br.com.maven.systemlabs.service.MedicoServices"%>
+<%@ page import="br.com.maven.systemlabs.model.Medico"%>
 <%@ page import="br.com.maven.systemlabs.model.Paciente"%>
+<%@ page import="br.com.maven.systemlabs.service.PacienteServices"%>
+
 
 
 <%
@@ -173,7 +175,7 @@
         </div>
 
         <hr class="my-4">
-        <button class="w-30 btn btn-primary btn-lg" type="button" onclick="validaCadastro()">Cadastrar</button>
+        <button class="w-30 btn btn-primary btn-lg" type="submit" onclick="validaCadastro()">Cadastrar</button>
       </form>
       <!-- Fim formulÃ¡rio cadastro -->
 

@@ -16,12 +16,12 @@ public class Db {
 		final String pass	= "1234567";
 		final String host	= "localhost";
 		
-		final String url	= "jdbc:mysql://" + host + ":" + "/livraria?verifyServerCertificate=false&useSSL=true"; 
+		final String url	= "jdbc:mysql://" + host + ":" + "/clinicamedica?verifyServerCertificate=false&useSSL=true"; 
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(url,usr,pass);
-		//	System.out.print("Conectado!");
+//			System.out.print("Conectado!");
 			
 		}catch (Exception e) {
 			System.err.print(e);

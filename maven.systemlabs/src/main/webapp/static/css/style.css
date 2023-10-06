@@ -31,7 +31,28 @@ body {
     padding: 20px;
     width: 450px;
     box-shadow: 4px -1px 8px 2px #0f0e0e99;
-}x
+}
+
+.form-control{
+  color:#212529; /*Teste*/
+  /*text-transform: capitalize;*/
+}
+
+.form-label{
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+.box-register{
+    border-radius: 23px;
+    padding-top: 25px;
+    padding-bottom: 40px;
+    width: 40%;
+    box-shadow: 4px -1px 8px 2px #0f0e0e99;
+
+    display: flex;
+    justify-content: space-evenly;
+}
 
 
 /* CUSTOMIZE THE CAROUSEL

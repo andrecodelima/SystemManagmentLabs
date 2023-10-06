@@ -228,5 +228,58 @@ public class MedicoServices {
 	}
 	
 	
+	public static ArrayList<Medico> getMedicoByName(String nome){
+	
+		Connection conn = Db.conect();
+ 
+		try {
+			
+			String sql = "SELECT * FROM medicos WHERE nome LIKE '%" + nome + "%'";
+			PreparedStatement prepStatenent = conn.prepareStatement(sql);
+			ResultSet result = prepStatenent.executeQuery();
+			
+			ArrayList<Medico> lista = new ArrayList<Medico>();
+			
+			while(result.next()) {
+				
+				lista.add(new Medico(
+					 result.getInt("id"),
+					 result.getString("nome"),
+					 result.getString("cpf"),
+					 result.getDate("nascimento").toLocalDate(),
+					 result.getString("genero"),
+					 result.getString("telefone"),
+					 result.getString("email"),
+					 result.getString("endereco"),
+					 result.getString("crm"),
+					 result.getString("especialidade")
+						
+						)
+					);
+				
+			}
+			
+			prepStatenent.close();
+			Db.Disconnect(conn);
+			
+			return lista;
+			
+		}catch (Exception e) {
+			System.out.print("Erro ao consultar nome" + e);
+		}
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

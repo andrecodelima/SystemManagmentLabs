@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
 <%@ page import= "java.text.DateFormat" %>
@@ -7,43 +6,69 @@
 <%@ page import= "java.util.ArrayList" %>
 
 <%@ page import="br.com.maven.systemlabs.model.Medico"%>
-<%@page import="br.com.maven.systemlabs.service.MedicoServices"%>
+<%@ page import="br.com.maven.systemlabs.service.MedicoServices"%>
+<%@ page import="br.com.maven.systemlabs.model.Paciente"%>
+<%@ page import="br.com.maven.systemlabs.service.PacienteServices"%>
+<%@ page import="br.com.maven.systemlabs.model.Exame"%>
+<%@ page import="br.com.maven.systemlabs.service.ExameServices"%>
 
 <%
-	ArrayList<Medico> lista = MedicoServices.getAllMedicos();
+	ArrayList<Exame> 		lista 			= ExameServices.getAllExames();
+	ArrayList<Paciente>		listaPaciente	= PacienteServices.getAllPacientes();
+	ArrayList<Medico>		listaMedico		= MedicoServices.getAllMedicos();
+
+	String nomePaciente = "";
+	String nomeMedico	= "";
+
 	String line = "";
 	
 	if(lista.isEmpty()){
-		line = "<tr><th colspan='8'> Não há médicos cadastrados </tr></th>";
+		line = "<tr><th colspan='8'> Lista vazia </tr></th>";
 
 	}else{
 		
-		for(Medico m : lista){
+		for(Exame exame : lista){
 			
-			 int id						= m.getId();
-			 String nome 				= m.getNome();
-			 String cpf					= m.getCpf();
-			 LocalDate nascimento		= m.getNascimento();
-			 String genero				= m.getGenero();
-			 String telefone			= m.getTelefone();
-			 String email				= m.getEmail();
-			 String endereco			= m.getEndereco();
-			 String crm					= m.getCrm();
-			 String especialidade		= m.getEspecialidade();
-		
+			 int id					= exame.getId();
+			 String nome			= exame.getNome();
+			 LocalDate data			= exame.getData();
+			 int id_paciente		= exame.getId_paciente();
+			 int id_medico			= exame.getId_medico();
+			 
+			 for(Paciente paciente : listaPaciente){
+				 
+				 int idTabelaPaciente = paciente.getId();
+				 
+				 if(idTabelaPaciente == id_paciente){
+					 
+					 nomePaciente = paciente.getNome();
+					 System.out.print(nomePaciente);
+					 
+					 for(Medico medico : listaMedico ){
+						 
+						 int idTabelaMedico = medico.getId();
+						 
+						 if(idTabelaMedico == id_medico){
+							 
+							 nomeMedico = medico.getNome();
+							 System.out.print(nomePaciente);
+						 }
+						 
+					 }
+				 }
+				 
+				 
+			 }
+			  
 		
 		line += "<tr>"					+
 		
 				"<td>"					+ id				+ "</td>"		+
 				"<td>"					+ nome				+ "</td>"		+
-				"<td>"					+ cpf				+ "</td>"		+
-				"<td>"					+ nascimento		+ "</td>"		+
-				"<td>"					+ genero			+ "</td>"		+
-				"<td>"					+ telefone			+ "</td>"		+
-				"<td>"					+ email				+ "</td>"		+
-				"<td>"					+ endereco			+ "</td>"		+
-				"<td>"					+ crm				+ "</td>"		+
-				"<td>"					+ especialidade		+ "</td>"		+
+				"<td>"					+ data				+ "</td>"		+
+				"<td>"					+ nomePaciente		+ "</td>"		+
+				"<td>"					+ nomeMedico		+ "</td>"		+
+
 
 				
 				"<td><a class='btn btn-warning' href='editMedico.jsp?id="		 + id + "'>Editar</a></td>"  	+
@@ -62,7 +87,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medicos</title>
+  <title>Exames</title>
    
    <!-- Style - BS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -158,22 +183,18 @@
 <main class="main">
   <section class="box-register">
     <div class="col-md-7 col-lg-8">
-     <h4 class="mb-3">Médicos</h4>
+     <h4 class="mb-3">Exames</h4>
   
 
       <table class="table-responsive-lg">
         <thead>
           <tr>
             <th scope="col">Nº</th>
-            <th scope="col">Nome</th>
-            <th scope="col">CPF</th>
-            <th scope="col">Nascimento</th>
-            <th scope="col">Gênero</th>
-            <th scope="col">Telefone</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Endereço</th>
-            <th scope="col">Crm</th>
-            <th scope="col">Especialidade</th>
+            <th scope="col">Exame</th>
+            <th scope="col">Data</th>
+            <th scope="col">Paciente</th>
+			<th scope="col">Medico</th>
+              
             
           </tr>
         </thead>
